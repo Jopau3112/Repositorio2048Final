@@ -136,7 +136,6 @@
         rellenarTabla();
 		document.getElementById("score").innerHTML = "0";
 		score = parseInt(document.getElementById("score").innerHTML);
-        navigator.notification.alert("Para poder realizar movimientos, antes poner el móvil en posición horizontal",alerta,'IMPORTANTE','OK');
         onLoad();
     }
 
@@ -569,13 +568,15 @@
         }
     }
     function onSuccess(acceleration) {
+
 		if(acceleration.x>=-1 && acceleration.x<=2 &&
 			acceleration.y>=0 && acceleration.y<=3){
 			posicionXCero = true;
 			posicionYCero = true;
 			navigator.vibrate(1000);
-			window.plugins.toast.show("Realiza un movimiento",1000,'bottom');
+			window.plugins.toast.show("Realizar un movimiento",1000,'bottom');
 		}
+
 		if(posicionXCero && posicionYCero){
 			if(acceleration.x >= 4.5) {
 				//alert("Izquierda " + acceleration.x);
@@ -604,11 +605,6 @@
 		}
 		      
     }
-
-    function alerta(){
-
-    }
-
     function onError() {
         alert('onError!');
     }
