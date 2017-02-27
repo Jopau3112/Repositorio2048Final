@@ -136,6 +136,7 @@
         rellenarTabla();
 		document.getElementById("score").innerHTML = "0";
 		score = parseInt(document.getElementById("score").innerHTML);
+        navigator.notification.alert("Para poder realizar movimientos, antes poner el móvil en posición horizontal",alerta,'IMPORTANTE','OK');
         onLoad();
     }
 
@@ -569,33 +570,34 @@
     }
     function onSuccess(acceleration) {
 			
-		if(acceleration.x>=0 && acceleration.x<=1.5 && 
-			acceleration.y>=1 && acceleration.y<=2.5){
+		if(acceleration.x>=-1 && acceleration.x<=2 &&
+			acceleration.y>=0 && acceleration.y<=3){
 			posicionXCero = true;
 			posicionYCero = true;
+			navigator.vibrate(1000);
 			window.plugins.toast.show("Posición inicial",1000,'bottom');
 		}
 				
 		if(posicionXCero && posicionYCero){
-			if(acceleration.x >= 3.5) {
+			if(acceleration.x >= 4.5) {
 				//alert("Izquierda " + acceleration.x);
 				window.plugins.toast.show("Izquierda",1000,'bottom');
 				moverIzquierda();
 				posicionXCero = false;
 			}	
-			if(acceleration.x <= -2.5) {
+			if(acceleration.x <= -3.5) {
 				//alert("Derecha " + acceleration.x);
 				window.plugins.toast.show("Derecha",1000,'bottom');
 				moverDerecha();
 				posicionXCero = false;
 			}
-			if(acceleration.y >= 3) {
+			if(acceleration.y >= 5.5) {
 				//alert("Abajo " + acceleration.y);
 				window.plugins.toast.show("Abajo",1000,'bottom');
 				moverAbajo();
 				posicionYCero = false;
 			}	
-			if(acceleration.y <= -1) {
+			if(acceleration.y <= -2) {
 				//alert("Arriba " + acceleration.y);
 				window.plugins.toast.show("Arriba",1000,'bottom');
 				moverArriba();
@@ -604,6 +606,11 @@
 		}
 		      
     }
+
+    function alerta(){
+
+    }
+
     function onError() {
         alert('onError!');
     }
